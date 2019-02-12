@@ -12,7 +12,7 @@ import UIKit
 /// A UIControl subclass for creating customisable horizontal or vertical faders.
 @IBDesignable open class LiveFaderView: UIControl {
   /// Fader's control direction of the fader.
-  public enum Direction {
+  public enum ControlDirection {
     /// Horizontal fader.
     case horizontal
     /// Vertical fader.
@@ -20,7 +20,7 @@ import UIKit
   }
 
   /// Fader's contol style.
-  public enum Style {
+  public enum ControlStyle {
     /// Starts from bottom on vertical faders, starts from left end on horizontal faders.
     case fromBottom
     /// Starts from middle.
@@ -30,9 +30,9 @@ import UIKit
   /// Whether changes in the value of the knob generate continuous update events. Defaults true.
   @IBInspectable public var continuous = true
   /// Control style of the fader. Defaults `fromMiddle`.
-  public var style = Style.fromMiddle
+  public var style = ControlStyle.fromMiddle
   /// Control type of the fader. Defaults vertical.
-  public var direction = Direction.vertical
+  public var direction = ControlDirection.vertical
   /// Current value of the fader. Defaults 0.
   @IBInspectable public var value: Double = 0
   /// Maximum value of the fader. Defaults 0.
