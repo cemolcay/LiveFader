@@ -34,3 +34,11 @@ class ViewController: UIViewController {
     print("\(sender) \(sender.value)")
   }
 }
+
+class FaderScrollViewController: UIViewController {
+  @IBOutlet weak var faderScrollView: LiveFaderScrollView?
+
+  @IBAction func faderScrollerSwitchValueDidChange(sender: UISwitch) {
+    faderScrollView?.isFaderPanningEnabled = sender.isOn
+  }
+}

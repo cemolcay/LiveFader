@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UkX-mu-DOK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Single-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LiveFader" customModuleProvider="target" sceneMemberID="viewController">
@@ -144,6 +144,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Single" id="9CL-Aw-NeO"/>
                     <connections>
                         <outlet property="horizontalBottomFader" destination="4Kz-4j-yS1" id="h0Z-TF-h0n"/>
                         <outlet property="horizontalMiddleFader" destination="33Z-Ey-ikp" id="jrf-U9-vWm"/>
@@ -154,6 +155,255 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ZV0-Va-hoz">
+            <objects>
+                <tabBarController id="UkX-mu-DOK" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="meW-oW-RfS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="pw7-pQ-EJt"/>
+                        <segue destination="SWR-3y-POO" kind="relationship" relationship="viewControllers" id="jcm-1s-YLM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Tk-dr-H17" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="508" y="-636"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Zf1-Es-v9N">
+            <objects>
+                <navigationController id="SWR-3y-POO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="4uo-st-HS0"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5pe-hf-1U9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VGk-T4-TqN" kind="relationship" relationship="rootViewController" id="8hV-oX-FIB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Swj-Xt-wZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="134"/>
+        </scene>
+        <!--Scroll-->
+        <scene sceneID="dEG-Ap-EPM">
+            <objects>
+                <viewController id="VGk-T4-TqN" customClass="FaderScrollViewController" customModule="LiveFader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Whg-wd-Q0M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CM9-fh-xoA" customClass="LiveFaderScrollView" customModule="LiveFader" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hDi-8Y-hPG">
+                                        <rect key="frame" x="0.0" y="0.0" width="904" height="554"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qg0-TW-tJu" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="Geq-eG-kAO"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="wCz-GH-hQB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpr-Ke-kEs" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="46" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="FW0-JS-D4Z"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="Fdq-vd-tji"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zw-fc-AxG" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="92" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="oPF-dg-qKu"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="sGs-65-wzf"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yk0-zs-NJm" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="138" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="jNS-ZS-7sw"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="74g-cV-gsM"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXv-hb-dLV" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="184" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="VYe-yW-wRU"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="Mfp-Bo-f1K"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZh-hY-OCB" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="230" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="rXh-Ju-8M9"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="1hj-rw-MVo"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nr-eX-B1n" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="276" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="Zay-PB-jEG"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="Q9R-gN-Sr7"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDK-qu-J2r" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="322" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="Xkh-4D-ru1"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="il5-BO-PAX"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXv-fJ-HrD" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="368" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="NhA-D2-TlX"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="G1g-e7-Dhz"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vtY-XQ-yKg" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="414" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="JJv-hk-n6t"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="cpq-if-1ZU"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zB-6z-fgt" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="460" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="oQJ-O0-nvs"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="F5R-ib-FQE"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xio-oR-gqi" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="506" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="MMV-Bx-hIM"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="8C1-Y4-2Lu"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osy-Ax-gXj" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="552" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="KLA-ME-HRM"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="hwe-Cz-v2B"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZ8-y1-xcE" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="598" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="q8H-9W-VvF"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="sxA-Tx-QeL"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4Q-VZ-h69" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="644" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="WK4-1H-KSj"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="jfb-0Z-Pvk"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akJ-Cl-TN2" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="690" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="xL0-cb-9C1"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="PwJ-BH-dpS"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UnL-LL-Z7j" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="736" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="ATI-4V-0HQ"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="HHr-NX-G7N"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9s-Ph-mbx" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="782" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="0ZC-et-0RH"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="KZo-IM-tMk"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xr7-58-HZf" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="828" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="83e-fc-iWV"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="t5q-gx-BVv"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkk-hz-wqV" customClass="LiveFaderView" customModule="LiveFader" customModuleProvider="target">
+                                                <rect key="frame" x="874" y="0.0" width="30" height="554"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="qTo-t9-psH"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="hDi-8Y-hPG" firstAttribute="height" secondItem="CM9-fh-xoA" secondAttribute="height" id="0bQ-Dw-xoi"/>
+                                    <constraint firstItem="hDi-8Y-hPG" firstAttribute="top" secondItem="CM9-fh-xoA" secondAttribute="top" id="R4z-cw-Q5x"/>
+                                    <constraint firstAttribute="trailing" secondItem="hDi-8Y-hPG" secondAttribute="trailing" id="RWb-Yy-Jdj"/>
+                                    <constraint firstAttribute="bottom" secondItem="hDi-8Y-hPG" secondAttribute="bottom" id="XKV-fb-Svv"/>
+                                    <constraint firstItem="hDi-8Y-hPG" firstAttribute="leading" secondItem="CM9-fh-xoA" secondAttribute="leading" id="fjs-aL-7T4"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CM9-fh-xoA" firstAttribute="leading" secondItem="5du-DM-pmI" secondAttribute="leading" id="Bni-FY-wYy"/>
+                            <constraint firstItem="5du-DM-pmI" firstAttribute="bottom" secondItem="CM9-fh-xoA" secondAttribute="bottom" id="JVA-JV-pFO"/>
+                            <constraint firstItem="5du-DM-pmI" firstAttribute="trailing" secondItem="CM9-fh-xoA" secondAttribute="trailing" id="LkZ-cA-LPi"/>
+                            <constraint firstItem="CM9-fh-xoA" firstAttribute="top" secondItem="5du-DM-pmI" secondAttribute="top" id="cSa-h3-Wel"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5du-DM-pmI"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Scroll" id="q5F-U9-1yw"/>
+                    <navigationItem key="navigationItem" id="abT-dO-UIy">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="1kV-8h-do8">
+                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="kA2-EN-IAD">
+                                <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="faderScrollerSwitchValueDidChangeWithSender:" destination="VGk-T4-TqN" eventType="valueChanged" id="c55-8I-il4"/>
+                                </connections>
+                            </switch>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="faderScrollView" destination="CM9-fh-xoA" id="HJo-OO-f4p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="grg-oW-5Dn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="889"/>
         </scene>
     </scenes>
 </document>

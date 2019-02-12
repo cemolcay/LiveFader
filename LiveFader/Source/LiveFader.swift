@@ -1,4 +1,3 @@
-
 //
 //  LiveFader.swift
 //  LiveFader
@@ -179,7 +178,7 @@ import UIKit
   /// Sets the value of the fader.
   ///
   /// - Parameter pan: Pan gesture of the fader.
-  @objc private func didPan(pan: UIPanGestureRecognizer) {
+  @objc func didPan(pan: UIPanGestureRecognizer) {
     let touchPoint = pan.location(in: self)
 
     // Calculate value.
