@@ -1,7 +1,7 @@
 LiveFader
 ===
 
-`@IBDesignable` Horizontal or vertical fader that can start from bottom or middle of the control.
+`@IBDesignable` Horizontal or vertical UIControl subclass that can start from bottom or middle of the control.
 
 Demo
 ----
