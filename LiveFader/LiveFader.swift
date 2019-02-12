@@ -9,33 +9,53 @@
 
 import UIKit
 
+/// Fader's control direction of the fader.
 @objc public enum LiveFaderDirection: Int {
+  /// Horizontal fader.
   case horizontal
+  /// Vertical fader.
   case vertical
 }
 
+/// Fader's contol style.
 @objc public enum LiveFaderStyle: Int {
+  /// Starts from bottom on vertical faders, starts from left end on horizontal faders.
   case fromBottom
+  /// Starts from middle.
   case fromMiddle
 }
 
+/// A UIControl subclass for creating customisable horizontal or vertical faders.
 @IBDesignable open class LiveFaderView: UIControl {
-  /// Whether changes in the value of the knob generate continuous update events. Defaults `true`.
+  /// Whether changes in the value of the knob generate continuous update events. Defaults true.
   @IBInspectable public var continuous = true
+  /// Control style of the fader. Defaults `fromMiddle`.
   @IBInspectable public var style = LiveFaderStyle.fromMiddle
+  /// Control type of the fader. Defaults vertical.
   @IBInspectable public var direction = LiveFaderDirection.vertical
+  /// Current value of the fader. Defaults 0.
   @IBInspectable public var value: Double = 0
+  /// Maximum value of the fader. Defaults 0.
   @IBInspectable public var minValue: Double = 0
+  /// Minimum value of the fader. Defaults 1.
   @IBInspectable public var maxValue: Double = 1
 
+  /// Enabled background color.
   @IBInspectable public var faderEnabledBackgroundColor: UIColor = .lightGray
+  /// Enabled foreground color.
   @IBInspectable public var faderEnabledForegroundColor: UIColor = .blue
+  /// Highlighted background color. If not set, enabled bacground color will be used.
   @IBInspectable public var faderHighlightedBackgroundColor: UIColor?
+  /// Highlighted foreground color. If not set, enabled foreground color will be used.
   @IBInspectable public var faderHighlightedForegroundColor: UIColor?
+  /// Disabled background color.
   @IBInspectable public var faderDisabledBackgroundColor: UIColor? = .lightGray
+  /// Disabled foreground color.
   @IBInspectable public var faderDisabledForegroundColor: UIColor? = .blue
 
-  private var faderLayer = CALayer()
+  /// Foreground layer rendering the `value` of the fader.
+  public var faderLayer = CALayer()
+  /// Pan gesture setting the `value`.
   public var panGestureRecognizer = UIPanGestureRecognizer()
 
   open override var isEnabled: Bool {
@@ -68,7 +88,8 @@ import UIKit
     commonInit()
   }
 
-  func commonInit() {
+  /// Initializes the fader view.
+  public func commonInit() {
     layer.addSublayer(faderLayer)
     // Setup colors.
     backgroundColor = isEnabled ? faderEnabledBackgroundColor : faderDisabledForegroundColor
@@ -155,6 +176,9 @@ import UIKit
 
   // MARK: Actions
 
+  /// Sets the value of the fader.
+  ///
+  /// - Parameter pan: Pan gesture of the fader.
   @objc private func didPan(pan: UIPanGestureRecognizer) {
     let touchPoint = pan.location(in: self)
 
@@ -189,25 +213,14 @@ import UIKit
 
   // MARK: Utils
 
+  /// Converts a value in a range to a value in another range.
+  ///
+  /// - Parameters:
+  ///   - value: Value you want to convert.
+  ///   - inRange: The range of the value you want to convert.
+  ///   - toRange: The range you want your new value converted in.
+  /// - Returns: Converted value in a new range.
   private func convert<T: FloatingPoint>(value: T, inRange: ClosedRange<T>, toRange: ClosedRange<T>) -> T {
-    let oldRange = inRange.upperBound - inRange.lowerBound
-    let newRange = toRange.upperBound - toRange.lowerBound
-    return (((value - inRange.lowerBound) * newRange) / oldRange) + toRange.lowerBound
-  }
-
-  private func convert<T: SignedInteger>(value: T, inRange: ClosedRange<T>, toRange: ClosedRange<T>) -> T {
-    let oldRange = inRange.upperBound - inRange.lowerBound
-    let newRange = toRange.upperBound - toRange.lowerBound
-    return (((value - inRange.lowerBound) * newRange) / oldRange) + toRange.lowerBound
-  }
-
-  private func convert<T: FloatingPoint>(value: T, inRange: Range<T>, toRange: Range<T>) -> T {
-    let oldRange = inRange.upperBound - inRange.lowerBound
-    let newRange = toRange.upperBound - toRange.lowerBound
-    return (((value - inRange.lowerBound) * newRange) / oldRange) + toRange.lowerBound
-  }
-
-  private func convert<T: SignedInteger>(value: T, inRange: Range<T>, toRange: Range<T>) -> T {
     let oldRange = inRange.upperBound - inRange.lowerBound
     let newRange = toRange.upperBound - toRange.lowerBound
     return (((value - inRange.lowerBound) * newRange) / oldRange) + toRange.lowerBound
