@@ -31,6 +31,6 @@ class ViewController: UIViewController {
   }
 
   @IBAction func faderValueDidChange(sender: LiveFaderView) {
-    print("sender \(sender.value)")
+    print("\(sender) \(sender.value)")
   }
 }

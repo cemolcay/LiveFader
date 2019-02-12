@@ -9,21 +9,21 @@
 
 import UIKit
 
+@objc public enum LiveFaderDirection: Int {
+  case horizontal
+  case vertical
+}
+
+@objc public enum LiveFaderStyle: Int {
+  case fromBottom
+  case fromMiddle
+}
+
 @IBDesignable open class LiveFaderView: UIControl {
-  @objc public enum Direction: Int {
-    case horizontal
-    case vertical
-  }
-
-  @objc public enum Style: Int {
-    case fromBottom
-    case fromMiddle
-  }
-
   /// Whether changes in the value of the knob generate continuous update events. Defaults `true`.
   @IBInspectable public var continuous = true
-  @IBInspectable public var style = Style.fromMiddle
-  @IBInspectable public var direction = Direction.vertical
+  @IBInspectable public var style = LiveFaderStyle.fromMiddle
+  @IBInspectable public var direction = LiveFaderDirection.vertical
   @IBInspectable public var value: Double = 0
   @IBInspectable public var minValue: Double = 0
   @IBInspectable public var maxValue: Double = 1
