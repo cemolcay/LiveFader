@@ -9,7 +9,7 @@
 import UIKit
 
 /// Lets you control multiple faders in a scroll view with a single pan gesture.
-public class LiveFaderScrollView: UIScrollView {
+public class LiveFaderScrollView: UIScrollView, UIGestureRecognizerDelegate {
   /// Setter for multiple fader editing with a single pan gesture.
   public var isFaderPanningEnabled = false { didSet { faderPanningStateDidChange() }}
   /// The single pan gesture that controls the every fader in the scroll view.
@@ -48,8 +48,8 @@ public class LiveFaderScrollView: UIScrollView {
     } else {
       isScrollEnabled = true
       faderPanGestureRecognizer.isEnabled = false
-      faderViews = []
       faderViews.forEach({ $0.panGestureRecognizer.isEnabled = true })
+      faderViews = []
     }
   }
 
@@ -61,7 +61,7 @@ public class LiveFaderScrollView: UIScrollView {
   @objc private func handleFaderPanning(pan: UIPanGestureRecognizer) {
     let location = pan.location(in: self)
     if let fader = faderViews.filter({ $0.frame.contains(location) }).first {
-      fader.didPan(pan: pan)
+      fader.handleGestureRecognizer(gestureRecognizer: pan)
     }
   }
 
@@ -79,5 +79,11 @@ public class LiveFaderScrollView: UIScrollView {
       }
     }
     return views
+  }
+
+  // MARK: UIGestureRecognizerDelegate
+
+  public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
 }

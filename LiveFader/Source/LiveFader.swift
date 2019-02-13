@@ -56,6 +56,7 @@ import UIKit
   public var faderLayer = CALayer()
   /// Pan gesture setting the `value`.
   public var panGestureRecognizer = UIPanGestureRecognizer()
+  public var tapGestureRecognizer = UITapGestureRecognizer()
 
   open override var isEnabled: Bool {
     didSet {
@@ -94,8 +95,10 @@ import UIKit
     backgroundColor = isEnabled ? faderEnabledBackgroundColor : faderDisabledForegroundColor
     faderLayer.backgroundColor = isEnabled ? faderEnabledForegroundColor.cgColor : faderDisabledForegroundColor?.cgColor
     // Setup gesture recognizers.
-    panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(pan:)))
+    panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
     addGestureRecognizer(panGestureRecognizer)
+    tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
+    addGestureRecognizer(tapGestureRecognizer)
   }
 
   // MARK: Lifecyle
@@ -178,8 +181,8 @@ import UIKit
   /// Sets the value of the fader.
   ///
   /// - Parameter pan: Pan gesture of the fader.
-  @objc func didPan(pan: UIPanGestureRecognizer) {
-    let touchPoint = pan.location(in: self)
+  @objc func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+    let touchPoint = gestureRecognizer.location(in: self)
 
     // Calculate value.
     switch direction {
@@ -197,17 +200,17 @@ import UIKit
       value = max(minValue, min(maxValue, newValue))
     }
 
+    // Draw.
+    setNeedsLayout()
+
     // Inform changes based on continuous behaviour of the control.
     if continuous {
       sendActions(for: .valueChanged)
     } else {
-      if pan.state == .ended || pan.state == .cancelled {
+      if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
         sendActions(for: .valueChanged)
       }
     }
-
-    // Draw.
-    setNeedsLayout()
   }
 
   // MARK: Utils
