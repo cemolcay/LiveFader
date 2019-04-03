@@ -117,7 +117,7 @@ open class LiveFaderView: UIControl {
         height: frame.size.height)
     case (.fromMiddle, .vertical):
       let isUp = value > ((maxValue - minValue) / 2.0)
-      let height = CGFloat(convert(
+      var height = CGFloat(convert(
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.height)))
@@ -137,7 +137,7 @@ open class LiveFaderView: UIControl {
       }
     case (.fromMiddle, .horizontal):
       let isUp = value > ((maxValue - minValue) / 2.0)
-      let width = CGFloat(convert(
+      var width = CGFloat(convert(
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.width)))
