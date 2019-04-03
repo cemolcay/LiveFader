@@ -9,7 +9,7 @@
 import UIKit
 
 /// A UIControl subclass for creating customisable horizontal or vertical faders.
-@IBDesignable open class LiveFaderView: UIControl {
+open class LiveFaderView: UIControl {
   /// Fader's control direction of the fader.
   public enum ControlDirection {
     /// Horizontal fader.
@@ -27,54 +27,39 @@ import UIKit
   }
 
   /// Whether changes in the value of the knob generate continuous update events. Defaults true.
-  @IBInspectable public var continuous = true
+  public var continuous = true
   /// Control style of the fader. Defaults `fromMiddle`.
-  public var style = ControlStyle.fromMiddle
+  public var style = ControlStyle.fromMiddle { didSet{ setNeedsLayout() }}
   /// Control type of the fader. Defaults vertical.
-  public var direction = ControlDirection.vertical
+  public var direction = ControlDirection.vertical { didSet{ setNeedsLayout() }}
   /// Current value of the fader. Defaults 0.
-  @IBInspectable public var value: Double = 0
+  public var value: Double = 0 { didSet{ setNeedsLayout() }}
   /// Maximum value of the fader. Defaults 0.
-  @IBInspectable public var minValue: Double = 0
+  public var minValue: Double = 0 { didSet{ setNeedsLayout() }}
   /// Minimum value of the fader. Defaults 1.
-  @IBInspectable public var maxValue: Double = 1
+  public var maxValue: Double = 1 { didSet{ setNeedsLayout() }}
 
   /// Enabled background color.
-  @IBInspectable public var faderEnabledBackgroundColor: UIColor = .lightGray
+  public var faderEnabledBackgroundColor: UIColor = .lightGray { didSet{ setupColors() }}
   /// Enabled foreground color.
-  @IBInspectable public var faderEnabledForegroundColor: UIColor = .blue
+  public var faderEnabledForegroundColor: UIColor = .blue { didSet{ setupColors() }}
   /// Highlighted background color. If not set, enabled bacground color will be used.
-  @IBInspectable public var faderHighlightedBackgroundColor: UIColor?
+  public var faderHighlightedBackgroundColor: UIColor? { didSet{ setupColors() }}
   /// Highlighted foreground color. If not set, enabled foreground color will be used.
-  @IBInspectable public var faderHighlightedForegroundColor: UIColor?
+  public var faderHighlightedForegroundColor: UIColor? { didSet{ setupColors() }}
   /// Disabled background color.
-  @IBInspectable public var faderDisabledBackgroundColor: UIColor? = .lightGray
+  public var faderDisabledBackgroundColor: UIColor? = .lightGray { didSet{ setupColors() }}
   /// Disabled foreground color.
-  @IBInspectable public var faderDisabledForegroundColor: UIColor? = .blue
+  public var faderDisabledForegroundColor: UIColor? = .blue { didSet{ setupColors() }}
+
+  open override var isEnabled: Bool { didSet { setupColors() }}
+  open override var isHighlighted: Bool { didSet { setupColors() }}
 
   /// Foreground layer rendering the `value` of the fader.
   public var faderLayer = CALayer()
   /// Pan gesture setting the `value`.
   public var panGestureRecognizer = UIPanGestureRecognizer()
   public var tapGestureRecognizer = UITapGestureRecognizer()
-
-  open override var isEnabled: Bool {
-    didSet {
-      backgroundColor = isEnabled ? faderEnabledBackgroundColor : faderDisabledBackgroundColor
-      faderLayer.backgroundColor = isEnabled ? faderEnabledForegroundColor.cgColor : faderDisabledForegroundColor?.cgColor
-    }
-  }
-
-  open override var isHighlighted: Bool {
-    didSet {
-      backgroundColor = isEnabled ?
-        (isHighlighted ? (faderHighlightedBackgroundColor ?? faderEnabledBackgroundColor) : faderEnabledBackgroundColor) :
-        faderDisabledBackgroundColor
-      faderLayer.backgroundColor = isEnabled ?
-        (isHighlighted ? (faderHighlightedForegroundColor?.cgColor ?? faderEnabledForegroundColor.cgColor) : faderEnabledForegroundColor.cgColor) :
-        faderDisabledForegroundColor?.cgColor
-    }
-  }
 
   // MARK: Init
 
@@ -91,13 +76,12 @@ import UIKit
   /// Initializes the fader view.
   public func commonInit() {
     layer.addSublayer(faderLayer)
-    // Setup colors.
-    backgroundColor = isEnabled ? faderEnabledBackgroundColor : faderDisabledForegroundColor
-    faderLayer.backgroundColor = isEnabled ? faderEnabledForegroundColor.cgColor : faderDisabledForegroundColor?.cgColor
     // Setup gesture recognizers.
-    panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
+    panGestureRecognizer = UIPanGestureRecognizer()
+    panGestureRecognizer.addTarget(self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
     addGestureRecognizer(panGestureRecognizer)
-    tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
+    tapGestureRecognizer = UITapGestureRecognizer()
+    tapGestureRecognizer.addTarget(self, action: #selector(handleGestureRecognizer(gestureRecognizer:)))
     addGestureRecognizer(tapGestureRecognizer)
   }
 
@@ -110,20 +94,22 @@ import UIKit
 
     switch (style, direction) {
     case (.fromBottom, .vertical):
-      let height = CGFloat(convert(
+      var height = CGFloat(convert(
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.height)))
+      height = height.isNaN ? 0 : height
       faderLayer.frame = CGRect(
         x: 0,
         y: frame.size.height - height,
         width: frame.size.width,
         height: height)
     case (.fromBottom, .horizontal):
-      let width = CGFloat(convert(
+      var width = CGFloat(convert(
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.width)))
+      width = width.isNaN ? 0 : width
       faderLayer.frame = CGRect(
         x: 0,
         y: 0,
@@ -135,6 +121,7 @@ import UIKit
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.height)))
+      height = height.isNaN ? 0 : height
       if isUp {
         faderLayer.frame = CGRect(
           x: 0,
@@ -154,6 +141,7 @@ import UIKit
         value: value,
         inRange: minValue...maxValue,
         toRange: 0...Double(frame.size.width)))
+      width = width.isNaN ? 0 : width
       if isUp {
         faderLayer.frame = CGRect(
           x: frame.size.width / 2.0,
@@ -168,12 +156,18 @@ import UIKit
           height: frame.size.height)
       }
     }
+
     CATransaction.commit()
   }
 
-  open override func prepareForInterfaceBuilder() {
-    super.prepareForInterfaceBuilder()
-    layoutSubviews()
+  /// Sets the colors on enabled/disable/highlighted state changes.
+  open func setupColors() {
+    backgroundColor = isEnabled ?
+      (isHighlighted ? (faderHighlightedBackgroundColor ?? faderEnabledBackgroundColor) : faderEnabledBackgroundColor) :
+    faderDisabledBackgroundColor
+    faderLayer.backgroundColor = isEnabled ?
+      (isHighlighted ? (faderHighlightedForegroundColor?.cgColor ?? faderEnabledForegroundColor.cgColor) : faderEnabledForegroundColor.cgColor) :
+      faderDisabledForegroundColor?.cgColor
   }
 
   // MARK: Actions
@@ -181,7 +175,7 @@ import UIKit
   /// Sets the value of the fader.
   ///
   /// - Parameter pan: Pan gesture of the fader.
-  @objc func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+  @objc public func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
     let touchPoint = gestureRecognizer.location(in: self)
 
     // Calculate value.
