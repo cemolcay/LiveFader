@@ -48,3 +48,9 @@ LiveFaderScrollView
 * Set its `isFaderPanningEnabled` property to true. 
 * It won't let you scroll in this mode because you will use the current pan gesture for editing faders instead of scrolling.
 * Finds all `LiveFaderView`s in itself and it's subviews recursively, feel free to add your faders in a stack view or a custom container inside your `LiveFaderScrollView`.
+
+App Store
+----
+
+This library used in my apps in App Store, check them up!  
+* [StepBud](https://itunes.apple.com/us/app/stepbud-auv3-midi-sequencer/id1453104408?mt=8) (iOS, AUv3)
