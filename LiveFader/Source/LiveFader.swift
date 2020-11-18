@@ -205,6 +205,10 @@ open class LiveFaderView: UIControl {
         sendActions(for: .valueChanged)
       }
     }
+    
+    if gestureRecognizer.state == .ended {
+      sendActions(for: .editingDidEnd)
+    }
   }
 
   // MARK: Utils
