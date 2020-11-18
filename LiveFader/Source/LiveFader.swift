@@ -175,7 +175,7 @@ open class LiveFaderView: UIControl {
   /// Sets the value of the fader.
   ///
   /// - Parameter pan: Pan gesture of the fader.
-  @objc public func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+  @objc open func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
     let touchPoint = gestureRecognizer.location(in: self)
 
     // Calculate value.
