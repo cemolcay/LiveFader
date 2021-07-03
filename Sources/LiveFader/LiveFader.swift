@@ -11,7 +11,7 @@ import UIKit
 /// A UIControl subclass for creating customisable horizontal or vertical faders.
 open class LiveFaderView: UIControl {
   /// Fader's control direction of the fader.
-  public enum ControlDirection {
+  public enum ControlDirection: Int, Codable {
     /// Horizontal fader.
     case horizontal
     /// Vertical fader.
@@ -19,7 +19,7 @@ open class LiveFaderView: UIControl {
   }
 
   /// Fader's contol style.
-  public enum ControlStyle {
+  public enum ControlStyle: Int, Codable {
     /// Starts from bottom on vertical faders, starts from left end on horizontal faders.
     case fromBottom
     /// Starts from middle.
