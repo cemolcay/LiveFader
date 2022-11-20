@@ -49,8 +49,17 @@ LiveFaderScrollView
 * It won't let you scroll in this mode because you will use the current pan gesture for editing faders instead of scrolling.
 * Finds all `LiveFaderView`s in itself and it's subviews recursively, feel free to add your faders in a stack view or a custom container inside your `LiveFaderScrollView`.
 
+SwiftUI Bridge
+---
+
+You can use it with SwiftUI  
+https://gist.github.com/cemolcay/8cf7a413e4fcc20bc8c456bc0a5832be  
+
 App Store
 ----
 
 This library used in my apps in App Store, check them up!  
 * [StepBud](https://itunes.apple.com/us/app/stepbud-auv3-midi-sequencer/id1453104408?mt=8) (iOS, AUv3)
+* [ArpBud 2](https://apps.apple.com/us/app/arpbud-2-auv3-midi-arpeggiator/id1500403326) (iOS, AUv3, M1)  
+* [PolyBud](https://apps.apple.com/us/app/polybud-polyrhythmic-sequencer/id1624211288) (iOS, AUv3, M1) 
+
